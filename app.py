@@ -1,16 +1,17 @@
 import base64
 import datetime
 import io
+import logging
 import webbrowser
+
 import dash
 import pandas as pd
 import plotly.express as px
-from dash import dash_table,dcc ,html, callback_context
+from dash import dash_table, dcc, html, callback_context
 from dash.dependencies import Input, Output, State
+
 import input_converter
 from database import user_output_data as uod
-import logging
-import dash_bootstrap_components as dbc
 
 
 def update_ui_output():
@@ -19,6 +20,8 @@ def update_ui_output():
 
 
 external_stylesheets, colors, basic_style, basic_style2 = uod.get_fronts()
+
+
 # Using this for reading PDF file to show how to use in the dash
 
 
@@ -33,8 +36,8 @@ def get_logger():
     return logger
 
 
-app = dash.Dash(__name__,external_stylesheets=external_stylesheets, suppress_callback_exceptions=True,)
-app.title ='Work Scheduling Optimization'
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets, suppress_callback_exceptions=True, )
+app.title = 'Work Scheduling Optimization'
 app.layout = html.Div(style={'backgroundColor': colors['background']},
                       children=[
                           html.Br(),
@@ -43,7 +46,7 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
                               html.Button('Source Code', id='btn-nclicks-2', n_clicks=0),
                           ], style={'marginLeft': '75%'}),
                           html.Div(id='container-button-timestamp'),
-                          html.H1("Work Scheduling Optimization", style= basic_style2),
+                          html.H1("Work Scheduling Optimization", style=basic_style2),
 
                           dcc.Tabs([
                               dcc.Tab(label='User Input', children=[
@@ -53,12 +56,15 @@ app.layout = html.Div(style={'backgroundColor': colors['background']},
                                       style=basic_style2),
                                   dcc.Input(id="input1", type="number", placeholder="Number of Machines A",
                                             style={'marginLeft': '20%', 'textAlign': 'center'}),
-                                  dcc.Input(id="input2", type="number", placeholder="Number of Machines B", debounce=True,
-                                            style={'textAlign': 'center','margin': '10px'}),
-                                  dcc.Input(id="input3", type="number", placeholder="Number of Workers A", debounce=True,
+                                  dcc.Input(id="input2", type="number", placeholder="Number of Machines B",
+                                            debounce=True,
+                                            style={'textAlign': 'center', 'margin': '10px'}),
+                                  dcc.Input(id="input3", type="number", placeholder="Number of Workers A",
+                                            debounce=True,
                                             style={'textAlign': 'center'}),
-                                  dcc.Input(id="input4", type="number", placeholder="Number of Workers B", debounce=True,
-                                            style={'textAlign': 'center','margin': '10px'}),
+                                  dcc.Input(id="input4", type="number", placeholder="Number of Workers B",
+                                            debounce=True,
+                                            style={'textAlign': 'center', 'margin': '10px'}),
                                   html.Hr(),
                                   html.H5(
                                       "Upload the file with the Jobs needed to be scheduled",
@@ -212,6 +218,7 @@ def parse_contents(contents, filename, date):
 """
 this refers to the csv file that the user uploaded to the sw, the data inside it is hte tasks that he have.
 """
+
 
 @app.callback(
     Output('container-button-timestamp', 'children'),

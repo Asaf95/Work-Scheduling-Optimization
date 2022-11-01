@@ -1,8 +1,9 @@
-from datetime import date
+import logging
 from datetime import datetime
+
 import pandas as pd
 from workalendar.asia import Israel
-import logging
+
 """a
 
 this script will deal with all the dates converting and for now also stores Israel calendar.  
@@ -21,7 +22,7 @@ Israel calendar will be used to know if it's possible  to schedule the job at th
 """
 cal = Israel()
 logging.basicConfig(level=logging.INFO, filename="logs", filemode="w",
-                    format= "%(asctime)s -%(levelname)s - %(message)s")
+                    format="%(asctime)s -%(levelname)s - %(message)s")
 
 
 def get_logger():
@@ -69,11 +70,9 @@ import datetime
 
 
 def from_string_to_int(data_string):
-
     y = datetime.datetime.strptime(data_string, "%d/%m/%Y")
     y = to_integer_from_date(y)
     return y
-
 
 #
 #

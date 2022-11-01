@@ -8,9 +8,11 @@ what this module will do:
 3. generate weighted score for each job considering the resources it will take and the profit.
 4. convert from open_shop to job_shop
 """
-import pandas as pd
-import jobshop_solver as jss
 import logging
+
+import pandas as pd
+
+import jobshop_solver as jss
 
 
 def get_logger():
@@ -64,7 +66,6 @@ def make_outputs(string_results, list_results):
             task = dict(Task=machine_name, Start=StartDate, Finish=EndDate, Resource=name_of_task)
             transform_to_lists.append(task)
     return transform_to_lists
-
 
 # df = [dict(Task="Job AB", Start='2009-01-01', Finish='2009-01-28'),
 #       dict(Task="Job B", Start='2009-01-05', Finish='2009-02-15'),

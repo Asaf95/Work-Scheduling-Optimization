@@ -1,7 +1,10 @@
-from os import listdir
-import pandas
-import time_converter as tc
 import logging
+from os import listdir
+
+import pandas
+
+import time_converter as tc
+
 """
 Thia file convert the data from the user Input to objects that the Algorithm can use to solve the problem
 It will get data from the app.py:
@@ -123,4 +126,3 @@ def start_level2_files(df_Job_Pro, df_Input_Job, df_Machine_Pro, df_Input_Machin
     all_machines.to_csv(f'database/combine_data_from_user/all_machines.csv',
                         index=False, header=True, encoding='utf-8-sig')
     logger.info('User Data was processed into the database')
-
